@@ -10,7 +10,7 @@ jobs:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
       - name: merge-pr
-        run:
+        run: |
           date=$(date -u '+%Y-%m-%d %H:%M:%S')
           gh pr create \
             --head preprod	 \

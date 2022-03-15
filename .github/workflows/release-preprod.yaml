@@ -10,7 +10,7 @@ jobs:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
       - name: merge-pr
-        run:
+        run: |
           gh pr merge preprod \
             --auto \
             --squash \
