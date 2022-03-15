@@ -4,7 +4,7 @@ on:
     - cron:  '*/5 * * * *'
 
 jobs:
-  create-and-merge-pr:
+  merge-pr:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

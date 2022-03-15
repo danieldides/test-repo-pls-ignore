@@ -10,13 +10,15 @@ jobs:
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: merge-pr
         run: |
-          date=$(date -u '+%Y-%m-%d %H:%M:%S')
           gh pr create \
-            --head preprod	 \
+            --head preprod \
             --base master \
-            --title "${date} - Release Preprod" \
+            --title "$(date -u '+%Y-%m-%d %H:%M:%S') - Release Preprod" \
             --body "This PR was created automatically. If all checks pass, this PR will be merged in 2 hours." \
             --repo github.com/danieldides/test-repo-pls-ignore
 
