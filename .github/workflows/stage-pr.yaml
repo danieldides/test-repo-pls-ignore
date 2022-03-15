@@ -1,0 +1,22 @@
+name: Stage Preprod PR
+on:
+  push:
+    branches:
+      - preprod
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - name: merge-pr
+        run: |
+          date=$(date -u '+%Y-%m-%d %H:%M:%S')
+          gh pr create \
+            --head preprod	 \
+            --base master \
+            --title "${date} - Release Preprod" \
+            --body "This PR was created automatically. If all checks pass, this PR will be merged in 2 hours." \
+            --repo github.com/danieldides/test-repo-pls-ignore
+
