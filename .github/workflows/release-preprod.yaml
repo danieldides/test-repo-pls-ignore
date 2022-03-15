@@ -1,4 +1,4 @@
-name: pr-preprod-to-release
+name: Merge Preprod PR (Every 5 minutes)
 on:
   schedule:
     - cron:  '*/5 * * * *'
@@ -9,13 +9,10 @@ jobs:
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
-      - name: create-pr
+      - name: merge-pr
         run:
-          date=$(date -u '+%Y-%m-%d %H:%M:%S')
-          gh pr create \
-            --head preprod	 \
-            --base master \
-            --title "${date} - Release Preprod" \
-            --body "This PR was created automatically." \
+          gh pr merge preprod \
+            --auto \
+            --squash \
             --repo github.com/danieldides/test-repo-pls-ignore
 
