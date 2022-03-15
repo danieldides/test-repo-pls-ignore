@@ -2,7 +2,8 @@ name: Stage Preprod PR
 on:
   push:
     branches:
-      - 'preprod'
+      - preprod
+
 jobs:
   create-pr:
     runs-on: ubuntu-latest
