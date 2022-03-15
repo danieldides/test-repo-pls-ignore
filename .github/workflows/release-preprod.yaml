@@ -1,0 +1,21 @@
+name: pr-preprod-to-release
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+
+jobs:
+  create-and-merge-pr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - name: create-pr
+        run:
+          date=$(date -u '+%Y-%m-%d %H:%M:%S')
+          gh pr create \
+            --head preprod	 \
+            --base master \
+            --title "${date} - Release Preprod" \
+            --body "This PR was created automatically." \
+            --repo github.com/danieldides/test-repo-pls-ignore
+
