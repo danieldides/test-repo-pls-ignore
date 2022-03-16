@@ -1,7 +1,7 @@
 name: Merge Preprod PR (Every 5 minutes)
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '*/2 * * * *'
 
 jobs:
   merge-pr:
@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: preprod
 
       - name: merge-pr
         run: |
@@ -22,7 +24,7 @@ jobs:
       - name: reset preprod
         run: |
           # Bring preprod back up to speed with `release`
-          git checkout preprod
+          git status
           git reset --hard origin/master
           git push -f
 
