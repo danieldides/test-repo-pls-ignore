@@ -20,5 +20,5 @@ jobs:
             --base master \
             --title "$(date -u '+%Y-%m-%d %H:%M:%S') - Release Preprod" \
             --body "This PR was created automatically. If all checks pass, this PR will be merged in 2 hours." \
-            --repo github.com/danieldides/test-repo-pls-ignore || echo "Branch already exists"
+            --repo github.com/danieldides/test-repo-pls-ignore || echo "PR already exists"
 
