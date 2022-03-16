@@ -19,7 +19,7 @@ jobs:
 
       - name: merge-pr
         run: |
-          sleep 40
+          sleep 10
           gh pr merge preprod \
             --auto \
             --squash \
@@ -27,10 +27,10 @@ jobs:
 
       - name: reset preprod
         run: |
-          git fetch --no-tags --depth=1 origin master
-          git fetch --no-tags --depth=1 origin preprod
+          sleep 5
+          git fetch --no-tags --depth=1 origin/master master
+          git fetch --no-tags --depth=1 origin/master preprod
 
-          # Bring preprod back up to speed with `release`
           git reset --hard origin/master
           git push -f
 
