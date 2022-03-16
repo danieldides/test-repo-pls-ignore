@@ -28,8 +28,11 @@ jobs:
       - name: reset preprod
         run: |
           sleep 5
-          git fetch --no-tags --depth=1 origin/master master
-          git fetch --no-tags --depth=1 origin/master preprod
+          git checkout preprod
+          git pull
+
+          git fetch --no-tags --depth=1 origin master
+          git fetch --no-tags --depth=1 origin preprod
 
           git reset --hard origin/master
           git push -f
