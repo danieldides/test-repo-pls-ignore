@@ -13,10 +13,11 @@ jobs:
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: preprod
+      - uses: actions/checkout@v2
+      - name: Get preprod branch
+        run: |
+          git fetch --no-tags --depth=1 origin master
+          git fetch --no-tags --depth=1 origin preprod
 
       - name: merge-pr
         run: |
