@@ -1,7 +1,11 @@
 name: Merge Preprod PR (Every 5 minutes)
+  # on:
+  #   schedule:
+  #     - cron:  '*/5 * * * *'
 on:
-  schedule:
-    - cron:  '*/5 * * * *'
+  push:
+    branches:
+      - preprod
 
 jobs:
   merge-pr:
@@ -16,6 +20,7 @@ jobs:
 
       - name: merge-pr
         run: |
+          sleep 40
           gh pr merge preprod \
             --auto \
             --squash \
