@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: merge-pr
+      - name: create-pr
         run: |
           gh pr create \
             --head preprod \
