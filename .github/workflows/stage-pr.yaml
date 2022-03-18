@@ -14,6 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: set-env
+        run: |
+          echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+
       - name: create-pr
         run: |
           gh pr create \
@@ -25,4 +30,10 @@ jobs:
 
           echo github.base_ref
           echo $CURRENT_BRANCH
+
+          echo "env"
+          ${{ env.GITHUB_BRANCH }}
+
+          echo "previous step"
+          echo "GIT_BRANCH=${GIT_BRANCH}"
 
