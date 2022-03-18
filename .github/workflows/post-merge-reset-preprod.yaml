@@ -1,0 +1,33 @@
+name: Post Merge reset preprod
+on:
+  pull_request:
+    types:
+      - closed 
+
+jobs:
+  reset-preprod:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: preprod
+
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+
+      # https://stackoverflow.com/questions/60710209/trigger-github-actions-only-when-pr-is-merged 
+      - name: reset-preprod
+        if: github.event.pull_request.merged == true && github.event.head_ref == 'preprod'
+        run:
+          git checkout preprod
+          git pull
+
+          git fetch --no-tags --depth=1 origin release
+          git fetch --no-tags --depth=1 origin preprod
+
+          git reset --hard origin/release
+          git push --force-with-lease
+
