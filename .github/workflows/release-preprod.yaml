@@ -25,15 +25,3 @@ jobs:
             --squash \
             --repo github.com/danieldides/test-repo-pls-ignore || echo "Nothing to merge"
 
-      - name: reset preprod
-        run: |
-          sleep 5
-          git checkout preprod
-          git pull
-
-          git fetch --no-tags --depth=1 origin master
-          git fetch --no-tags --depth=1 origin preprod
-
-          git reset --hard origin/master
-          git push -f
-
