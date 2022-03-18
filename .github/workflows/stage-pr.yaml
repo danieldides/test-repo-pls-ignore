@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      CURRENT_BRANCH: ${{github.base_ref}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,4 +22,7 @@ jobs:
             --title "$(date -u '+%Y-%m-%d %H:%M:%S') - Release Preprod" \
             --body "This PR was created automatically. If all checks pass, this PR will be merged in 2 hours." \
             --repo github.com/danieldides/test-repo-pls-ignore || echo "PR already exists"
+
+          echo github.base_ref
+          echo $CURRENT_BRANCH
 
