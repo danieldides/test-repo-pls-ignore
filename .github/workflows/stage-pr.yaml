@@ -14,11 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: set-env
-        run: |
-          echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-
       - name: create-pr
         run: |
           gh pr create \
@@ -28,12 +23,8 @@ jobs:
             --body "This PR was created automatically. If all checks pass, this PR will be merged in 2 hours." \
             --repo github.com/danieldides/test-repo-pls-ignore || echo "PR already exists"
 
-          echo github.base_ref
-          echo $CURRENT_BRANCH
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
 
-          echo "env"
-          ${{ env.GITHUB_BRANCH }}
-
-          echo "previous step"
-          echo "GIT_BRANCH=${GIT_BRANCH}"
 
